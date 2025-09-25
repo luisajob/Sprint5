@@ -1,16 +1,22 @@
+import streamlit as st
 import pandas as pd
 import plotly.express as px
-import streamlit as st
-        
-car_data = pd.read_csv(r'../vehicles.csv') # lendo os dados
-hist_button = st.button('Criar histograma') # criar um botão
-        
-if hist_button: # se o botão for clicado
-    # escrever uma mensagem
-    st.write('Criando um histograma para o conjunto de dados de anúncios de vendas de carros')
-            
-    # criar um histograma
-    fig = px.histogram(car_data, x="odometer")
-        
-    # exibir um gráfico Plotly interativo
-    st.plotly_chart(fig, use_container_width=True)
+
+# Carregar dados do CSV
+df = pd.read_csv('vehicles.csv')
+
+# Cabeçalho principal
+st.header("Análise de Veículos nos EUA")
+
+# Botão para gerar histograma
+if st.button("Gerar Histograma de Preços"):
+    fig = px.histogram(df, x="price")  # ajuste o nome da coluna conforme seu CSV
+    st.plotly_chart(fig)
+
+# Cabeçalho para outra seção
+st.header("Gráfico de Dispersão")
+
+# Botão para gerar gráfico de dispersão
+if st.button("Gerar Gráfico de Dispersão"):
+    fig2 = px.scatter(df, x="model_year", y="price", color="model")
+    st.plotly_chart(fig2)
