@@ -3,3 +3,4 @@ scipy>=1.6
 streamlit>=1.12
 setuptools
 wheel
+plotly
